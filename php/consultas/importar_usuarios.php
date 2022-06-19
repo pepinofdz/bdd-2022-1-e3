@@ -11,11 +11,9 @@
     $result -> execute();
 
     $data = $result -> fetchAll();
-    
+    header('Refresh: 0; url = ../index.php')
 ?>
 
 
 
-    <?php
-    header('Refresh: 0; url = ../index.php')
-    ?>
+
