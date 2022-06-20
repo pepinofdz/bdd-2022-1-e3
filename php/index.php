@@ -33,19 +33,14 @@
             <input type="submit" value="Cerrar sesión">
         </form>
 
-        <form align="center" action="consultas/pokemones.php" method="post">
-            <input type="submit" value="Ver pokemones">
-        </form>
-
-        <form align="center" action="consultas/pelea_pokemon.php" method="post">
-            <input type="submit" value="Ver peleas">
-        </form>
-
-        <form align="center" action="consultas/crear_pelea_pokemon.php" method="post">
-            <input type="text" name="pid1">
-            <input type="text" name="pid2">
-            <input type="submit" value="Crear pelea">
-        </form>
+        <?php if ($_SESSION['tipo'] == 1) {?>
+            <p>Eres admin DGAC</p>
+        <?php } elseif ($_SESSION['tipo'] == 2) {?>
+            <p>Eres compañia</p>
+        <?php } elseif ($_SESSION['tipo'] == 3) {?>
+            <p>Eres pasajero</p>
+        <?php } ?>
+        
 
     <?php } ?>
 
