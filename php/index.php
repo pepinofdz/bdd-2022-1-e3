@@ -24,7 +24,7 @@
             <input type="submit" value="Iniciar sesión">
         </form>
 
-        <form align="center" action="consultas/importar_usuarios1.php" method="post">
+        <form align="center" action="consultas/importar_usuarios.php" method="post">
             <input type="submit" value="Importar Usuarios">
         </form>
 
