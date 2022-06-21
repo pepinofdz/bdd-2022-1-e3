@@ -34,9 +34,9 @@
         </form>
 
         <?php if ($_SESSION['tipo'] == 1) {?>
-            <p>Eres admin DGAC</p>
+            <?php include("consultas/ver_vuelos.php")?>
         <?php } elseif ($_SESSION['tipo'] == 2) {?>
-            <p>Eres compañia</p>
+            <?php include("consultas/vuelos_compania.php")?>
         <?php } elseif ($_SESSION['tipo'] == 3) {?>
             <p>Eres pasajero</p>
         <?php } ?>

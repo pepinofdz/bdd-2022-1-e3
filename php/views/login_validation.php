@@ -27,12 +27,15 @@
                 $msg = "Sesión iniciada correctamente.";
                 header("Location: ../index.php?msg=$msg");
             }
+            else {
+                $msg = "Credenciales incorrectas. Revisa el usuario y la contraseña<br>";
+                header("Location: login.php?msg=$msg");
+            }
         }
         else {
             $msg = "Credenciales incorrectas. Revisa el usuario y la contraseña<br>";
             header("Location: login.php?msg=$msg");
         }
-
         
         
     }
