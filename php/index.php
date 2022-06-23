@@ -3,6 +3,12 @@
         echo "Bienvenido/a: ";
         echo $_SESSION['username'];
     }
+
+    if (isset($_GET['msg'])) {
+        $msg = $_GET['msg'];
+    } else {
+        $msg = '';
+    }
 ?>
 
 <?php
@@ -16,6 +22,8 @@
 
 <body>
     <h1> Entrega 3</h1>
+    <br>
+    <p><?php echo $msg;?></p>
     <br>
     <?php
         if (!isset($_SESSION['username'])) {
