@@ -9,6 +9,14 @@
     } else {
         $msg = '';
     }
+
+    if (isset($_GET['fecha_inicio'])) {
+        $_fecha_inicio = $_GET['fecha_inicio'];
+    }
+
+    if (isset($_GET['fecha_fin'])) {
+        $_fecha_fin = $_GET['fecha_fin'];
+    }
 ?>
 
 <?php
@@ -42,7 +50,33 @@
         </form>
 
         <?php if ($_SESSION['tipo'] == 1) {?>
-            <?php include("consultas/ver_vuelos.php")?>
+            <form align="center" action="index.php" method="get">
+                <input type="date" name="fecha_inicio">
+                <input type="date" name="fecha_fin">
+                <input type="submit" value="Filtrar">
+            </form>
+            <form align="center" action="index.php" method="get">
+                <input type="submit" value="Quitar filtro">
+            </form>
+            
+            <!-- <?php
+            $link_filtro = "./consultas/ver_vuelos.php?";
+
+            if (isset($fecha_inicio)) {
+                $link_filtro .= "fecha_inicio=$fecha_inicio";
+                if (isset($fecha_fin)) {
+                    $link_filtro .= "&fecha_fin=$fecha_fin";
+                }
+            }
+
+            elseif (isset($fecha_fin)) {
+                $link_filtro .= "fecha_fin=$fecha_fin";
+            }
+            echo $link_filtro;
+            include($link_filtro)?> -->
+            <?php include("./consultas/ver_vuelos.php")?>
+
+
         <?php } elseif ($_SESSION['tipo'] == 2) {?>
             <?php include("consultas/vuelos_compania.php")?>
         <?php } elseif ($_SESSION['tipo'] == 3) {?>

@@ -1,10 +1,21 @@
 <?php
     require("config/conection.php");
     $username = $_SESSION['username'];
-    $query = "SELECT * FROM fpls WHERE estado = 'pendiente' AND realizado = 'no realizado';";
+    $query = "SELECT * FROM fpls, propuestas WHERE fpls.propuesta_vuelo_id =  propuestas.propuesta_vuelo_id AND fpls.estado = 'pendiente';";
     $result = $db2 -> prepare($query);
     $result -> execute();
     $data = $result -> fetchAll();
+?>
+
+<?php
+if (isset($_fecha_inicio)) {
+    echo $_fecha_inicio;
+    echo "<br>";
+}
+if (isset($_fecha_fin)) {
+    echo $_fecha_fin;
+    echo "<br>";
+}
 ?>
 
 <div id="table-wrapper" style="overflow-x:auto;">
@@ -26,6 +37,7 @@
             <th>Maximo de Pasajeros</th>
             <th>Pasaporte del Piloto</th>
             <th>Pasaporte del Copiloto</th>
+            <th>Fecha de Envio de la Propuesta</th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +59,7 @@
                 <td>$a[15]</td>
                 <td>$a[17]</td>
                 <td>$a[18]</td>
+                <td>$a[21]</td>
                 <td>
                     <form align='center' action='consultas/accion_vuelo.php' method='post'>
                         <input type='hidden' name='codigo_vuelo' value='$a[3]'>  
