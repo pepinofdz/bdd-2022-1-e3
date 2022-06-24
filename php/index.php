@@ -65,7 +65,7 @@
         <?php } elseif ($_SESSION['tipo'] == 2) {?>
             <?php include("consultas/vuelos_compania.php")?>
         <?php } elseif ($_SESSION['tipo'] == 3) {?>
-            <p>Eres pasajero</p>
+            <?php include("views/pasajero.php")?>
         <?php } ?>
         
 
