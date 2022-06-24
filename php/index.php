@@ -51,29 +51,14 @@
 
         <?php if ($_SESSION['tipo'] == 1) {?>
             <form align="center" action="index.php" method="get">
-                <input type="date" name="fecha_inicio">
-                <input type="date" name="fecha_fin">
+                <input type="date" name="fecha_inicio" required>
+                <input type="date" name="fecha_fin" required>
                 <input type="submit" value="Filtrar">
             </form>
             <form align="center" action="index.php" method="get">
                 <input type="submit" value="Quitar filtro">
             </form>
-            
-            <!-- <?php
-            $link_filtro = "./consultas/ver_vuelos.php?";
 
-            if (isset($fecha_inicio)) {
-                $link_filtro .= "fecha_inicio=$fecha_inicio";
-                if (isset($fecha_fin)) {
-                    $link_filtro .= "&fecha_fin=$fecha_fin";
-                }
-            }
-
-            elseif (isset($fecha_fin)) {
-                $link_filtro .= "fecha_fin=$fecha_fin";
-            }
-            echo $link_filtro;
-            include($link_filtro)?> -->
             <?php include("./consultas/ver_vuelos.php")?>
 
 

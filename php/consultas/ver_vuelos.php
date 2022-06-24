@@ -1,21 +1,21 @@
 <?php
     require("config/conection.php");
     $username = $_SESSION['username'];
-    $query = "SELECT * FROM fpls, propuestas WHERE fpls.propuesta_vuelo_id =  propuestas.propuesta_vuelo_id AND fpls.estado = 'pendiente';";
+
+    if (isset($_fecha_inicio) && isset($_fecha_fin)) {
+        echo "Mostrando vuelos solicitados desde $_fecha_inicio hasta $_fecha_fin";
+        $query = "SELECT * FROM fpls, propuestas WHERE fpls.propuesta_vuelo_id =  propuestas.propuesta_vuelo_id AND fpls.estado = 'pendiente' AND (propuestas.fecha_envio_propuesta BETWEEN '$_fecha_inicio' AND '$_fecha_fin');";
+    }
+    else{
+        $query = "SELECT * FROM fpls, propuestas WHERE fpls.propuesta_vuelo_id =  propuestas.propuesta_vuelo_id AND fpls.estado = 'pendiente';";
+    }
+    
     $result = $db2 -> prepare($query);
     $result -> execute();
     $data = $result -> fetchAll();
-?>
+    
 
-<?php
-if (isset($_fecha_inicio)) {
-    echo $_fecha_inicio;
-    echo "<br>";
-}
-if (isset($_fecha_fin)) {
-    echo $_fecha_fin;
-    echo "<br>";
-}
+    
 ?>
 
 <div id="table-wrapper" style="overflow-x:auto;">
