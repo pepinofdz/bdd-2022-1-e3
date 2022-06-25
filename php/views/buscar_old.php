@@ -76,8 +76,8 @@ if (isset($_GET['ciudad_origen']) && isset($_GET['ciudad_destino']) && isset($_G
     }
     $aerodromos_destino_string = implode(", ", $aerodromos_destino);
 
-    $query = "SELECT * FROM vuelo WHERE aerodromo_salida_id IN ($aerodromos_origen_string) AND aerodromo_llegada_id IN ($aerodromos_destino_string) AND fecha_salida = '$fecha_despegue_consulta';";
-    $result = $db1 -> prepare($query);
+    $query = "SELECT * FROM fpls WHERE aerodromo_salida_id IN ($aerodromos_origen_string) AND aerodromo_llegada_id IN ($aerodromos_destino_string) AND fecha_salida = '$fecha_despegue_consulta';";
+    $result = $db2 -> prepare($query);
     $result -> execute();
     $busqueda = $result -> fetchAll(); #IDs aerodromos de origen
 
@@ -90,7 +90,9 @@ if (isset($_GET['ciudad_origen']) && isset($_GET['ciudad_destino']) && isset($_G
         <tr>
             <th>Codigo de Vuelo</th>
             <th>Fecha de Salida</th>
+            <th>Hora de Salida</th>
             <th>Fecha de Llegada</th>
+            <th>Hora de Llegada</th>
             <th>Aerodromo de Salida</th>
             <th>Aerodromo de Llegada</th>
         </tr>
@@ -100,27 +102,29 @@ if (isset($_GET['ciudad_origen']) && isset($_GET['ciudad_destino']) && isset($_G
             if (isset($busqueda)){
                 if ($busqueda != []) {
                     foreach ($busqueda as $a) {
-                        $query = "SELECT nombre FROM aerodromo WHERE id = $a[1];";
-                        $result = $db1 -> prepare($query);
+                        $query = "SELECT nombre_aerodromo FROM aerodromocodigos WHERE aerodromo_id = $a[8];";
+                        $result = $db2 -> prepare($query);
                         $result -> execute();
                         $nombre_salida = $result -> fetchAll();
                         $nombre_salida = $nombre_salida[0][0];
 
-                        $query = "SELECT nombre FROM aerodromo WHERE id = $a[2];";
-                        $result = $db1 -> prepare($query);
+                        $query = "SELECT nombre_aerodromo FROM aerodromocodigos WHERE aerodromo_id = $a[9];";
+                        $result = $db2 -> prepare($query);
                         $result -> execute();
                         $nombre_llegada = $result -> fetchAll();
                         $nombre_llegada = $nombre_llegada[0][0];
                         
                         echo "<tr>
+                        <td>$a[3]</td>
                         <td>$a[4]</td>
+                        <td>$a[5]</td>
+                        <td>$a[6]</td>
                         <td>$a[7]</td>
-                        <td>$a[8]</td>
                         <td>$nombre_salida</td>
                         <td>$nombre_llegada</td>
                         <td>
                             <form align='center' action='reservar.php' method='get'>
-                                <input type='hidden' name='codigo_vuelo' value='$a[4]'>  
+                                <input type='hidden' name='fpl_id' value='$a[0]'>  
                                 <input type='submit' value='Reservar'>
                             </form>
                         </td>
