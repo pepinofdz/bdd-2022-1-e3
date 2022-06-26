@@ -66,8 +66,8 @@ BEGIN
         SELECT * INTO vuelo FROM vuelo WHERE codigo = codigo_vuelo;
         FOREACH passport in ARRAY passports LOOP
             SELECT * INTO person FROM persona WHERE pasaporte = passport;
-            FOREACH ticket in SELECT * FROM ticket WHERE pasajero_pasaporte = passport LOOP
-                FOREACH vuelo_ticket in SELECT * FROM ticket, vuelo WHERE ticket.vuelo_id = vuelo.id LOOP
+            FOR ticket in SELECT * FROM ticket WHERE pasajero_pasaporte = passport LOOP
+                FOR vuelo_ticket in SELECT * FROM ticket, vuelo WHERE ticket.vuelo_id = vuelo.id LOOP
                     IF (vuelo.fecha_salida >= vuelo_ticket.fecha_salida AND vuelo.fecha_salida <= vuelo_ticket.fecha_llegada) OR (vuelo.fecha_llegada <= vuelo_ticket.fecha_llegada AND vuelo.fecha_llegada >= vuelo_ticket.fecha_salida) THEN
                         valor := 4;
                         razon := 'Conflicto de fechas';
