@@ -1,11 +1,11 @@
-CREATE OR REPLACE FUNCTION reserva
+CREATE OR REPLACE FUNCTION reservar
 
 (passuser VARCHAR, pass VARCHAR, codigo_vuelo VARCHAR, OUT valor integer, OUT razon varchar, OUT pasaporte_problematico varchar)
 
 LANGUAGE plpgsql AS $$
 DECLARE
 
-    vuelo RECORD;
+    vuelo_var RECORD;
     
     cantidad RECORD;
     
@@ -15,9 +15,9 @@ DECLARE
     person RECORD;
     
     tickets RECORD;
-    ticket RECORD;
+    ticket_var RECORD;
     vuelo_ticket RECORD;
-    reserva_id RECORD;
+    reserva_id_max RECORD;
     codigo_reserva TEXT;
     reserva_id_nuevo integer;
 
@@ -63,12 +63,12 @@ BEGIN
 
         END LOOP;
         
-        SELECT * INTO vuelo FROM vuelo WHERE codigo = codigo_vuelo;
+        SELECT * INTO vuelo_var FROM vuelo WHERE codigo = codigo_vuelo;
         FOREACH passport in ARRAY passports LOOP
             SELECT * INTO person FROM persona WHERE pasaporte = passport;
-            FOR ticket in SELECT * FROM ticket WHERE pasajero_pasaporte = passport LOOP
+            FOR ticket_var in SELECT * FROM ticket WHERE pasajero_pasaporte = passport LOOP
                 FOR vuelo_ticket in SELECT * FROM ticket, vuelo WHERE ticket.vuelo_id = vuelo.id LOOP
-                    IF (vuelo.fecha_salida >= vuelo_ticket.fecha_salida AND vuelo.fecha_salida <= vuelo_ticket.fecha_llegada) OR (vuelo.fecha_llegada <= vuelo_ticket.fecha_llegada AND vuelo.fecha_llegada >= vuelo_ticket.fecha_salida) THEN
+                    IF (vuelo_var.fecha_salida >= vuelo_ticket.fecha_salida AND vuelo_var.fecha_salida <= vuelo_ticket.fecha_llegada) OR (vuelo_var.fecha_llegada <= vuelo_ticket.fecha_llegada AND vuelo_var.fecha_llegada >= vuelo_ticket.fecha_salida) THEN
                         valor := 4;
                         razon := 'Conflicto de fechas';
                         pasaporte_problematico := passport;
@@ -79,14 +79,14 @@ BEGIN
         END LOOP;
         
         
-        SELECT MAX(id) INTO reserva_id FROM reserva;
-        reserva_id_nuevo := reserva_id.max + 1;
-        codigo_reserva := codigo_vuelo || '-' || reserva_id;
+        SELECT MAX(reserva_id) AS maximo INTO reserva_id_max FROM reserva;
+        reserva_id_nuevo := reserva_id_max.maximo + 1;
+        codigo_reserva := codigo_vuelo || '-' || reserva_id_nuevo;
         INSERT INTO reserva VALUES(reserva_id_nuevo, codigo_reserva, passuser);
         
         FOREACH passport in ARRAY passports LOOP
             SELECT floor(random()*(69-1+1))+1 INTO asiento_random;
-            INSERT INTO ticket VALUES(reserva_id_nuevo, passport, vuelo.id, asiento_random, 'Economica', 'f');
+            INSERT INTO ticket VALUES(reserva_id_nuevo, passport, vuelo_var.id, asiento_random, 'Economica', 'f');
         END LOOP;
 
         valor := 420;

@@ -4,6 +4,11 @@
     session_start();
     $codigo_vuelo = $_GET['codigo_vuelo'];
 
+    if (isset($_GET['msg'])){
+        $msg = $_GET['msg'];
+        echo $msg;
+    }
+
     $pasaporte = $_SESSION['username'];
     $query = "SELECT * FROM persona WHERE pasaporte = '$pasaporte';";
     $result = $db1 -> prepare($query);

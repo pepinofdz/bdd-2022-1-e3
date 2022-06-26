@@ -34,7 +34,9 @@ echo $pasajeros_string;
 echo "<br>";
 
 
-$query = "SELECT * FROM reserva('$userpass', $pasajeros_string, '$codigo_vuelo');";
+$query = "SELECT reservar('$userpass', '$pasajeros_string', '$codigo_vuelo');";
+echo $query;
+echo "<br>";
 $result = $db1 -> prepare($query);
 $result -> execute();
 $data = $result -> fetchAll();
@@ -44,5 +46,24 @@ foreach ($data as $d) {
     echo "<br>";
     echo $d[1];
 }
+
+$out = substr($data[0][0], 1, strlen($data[0][0]) - 2);
+$out_list = explode(",", $out);
+
+foreach($out_list as $o) {
+    echo $o;
+    echo "<br>";
+}
+
+if ($out_list[0] == '420') {
+    $msg = 'Reserva realizada exitosamente';
+    header("Refresh: 0; url = ../index.php?msg=$msg");
+}
+else {
+    $msg = "Ha ocurrido un error. Verifica los datos e intentalo nuevamente";
+    header("Refresh: 0; url = ../views/reservar.php?codigo_vuelo=$codigo_vuelo&msg=$msg");
+}
+
+
 
 ?>
