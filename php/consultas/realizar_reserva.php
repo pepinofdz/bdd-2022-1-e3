@@ -34,7 +34,7 @@ echo $pasajeros_string;
 echo "<br>";
 
 
-$query = "SELECT * FROM reserva('$userpass', $pasajeros_string, '$codigo_vuelo', $cant_pasajeros);";
+$query = "SELECT * FROM reserva('$userpass', $pasajeros_string, '$codigo_vuelo');";
 $result = $db1 -> prepare($query);
 $result -> execute();
 $data = $result -> fetchAll();
