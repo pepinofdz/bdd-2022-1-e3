@@ -19,7 +19,7 @@ Se definen las variables a utilizar:
 
 - OUT pasaporte_problematico se usa para poder acceder a que pasaporte está causando conflicto. Recomiendo que lo usen para la parte de verificar
   lo de las fechas de los vuelos. Así, en la página pueden acceder al pasaporte wekereke y mostrarlo*/
-(passuser VARCHAR, pass VARCHAR, codigo_vuelo VARCHAR, OUT valor integer, OUT razon varchar, OUT pasaporte_problematico)
+(passuser VARCHAR, pass VARCHAR, codigo_vuelo VARCHAR, OUT valor integer, OUT razon varchar, OUT pasaporte_problematico varchar)
 
 LANGUAGE plpgsql AS $$
 DECLARE
