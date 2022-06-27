@@ -37,7 +37,31 @@
         $result -> execute();
     }
 
-    //header('Refresh: 0; url = ../index.php')
+    //Creando usuarios de pasajeros
+    $query = "SELECT * FROM persona;";
+    $result = $db1 -> prepare($query);
+    $result -> execute();
+    
+    $data = $result -> fetchAll();
+
+    foreach ($data as $a) {
+        //Contrasena
+        $pass = str_replace(' ', '', $a[1]);
+        $pass .= strval($a[0]);
+        $pass = strtolower($pass);
+        $pass = str_shuffle($pass);
+
+        if (strlen($pass) > 8) {
+            $pass = substr($pass, 0, 7);
+        }
+
+        $query = "INSERT INTO usuario(username, password, tipo) VALUES ( '$a[0]' , '$pass' , 3 );";
+        $result = $db1 -> prepare($query);
+        $result -> execute();
+        
+    }
+
+    header('Refresh: 0; url = ../index.php')
 ?>
 
 

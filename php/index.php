@@ -3,6 +3,20 @@
         echo "Bienvenido/a: ";
         echo $_SESSION['username'];
     }
+
+    if (isset($_GET['msg'])) {
+        $msg = $_GET['msg'];
+    } else {
+        $msg = '';
+    }
+
+    if (isset($_GET['fecha_inicio'])) {
+        $_fecha_inicio = $_GET['fecha_inicio'];
+    }
+
+    if (isset($_GET['fecha_fin'])) {
+        $_fecha_fin = $_GET['fecha_fin'];
+    }
 ?>
 
 <?php
@@ -16,6 +30,8 @@
 
 <body>
     <h1> Entrega 3</h1>
+    <br>
+    <p><?php echo $msg;?></p>
     <br>
     <?php
         if (!isset($_SESSION['username'])) {
@@ -33,19 +49,29 @@
             <input type="submit" value="Cerrar sesión">
         </form>
 
-        <form align="center" action="consultas/pokemones.php" method="post">
-            <input type="submit" value="Ver pokemones">
-        </form>
+        <?php if ($_SESSION['tipo'] == 1) {?>
+            <form align="center" action="index.php" method="get">
+                <input type="date" name="fecha_inicio" required>
+                <input type="date" name="fecha_fin" required>
+                <input type="submit" value="Filtrar">
+            </form>
+            <form align="center" action="index.php" method="get">
+                <p>Filtrar por fecha de solicitud</p>
+                <input type="submit" value="Quitar filtro">
+            </form>
 
-        <form align="center" action="consultas/pelea_pokemon.php" method="post">
-            <input type="submit" value="Ver peleas">
-        </form>
+            <?php include("./consultas/ver_vuelos.php")?>
 
-        <form align="center" action="consultas/crear_pelea_pokemon.php" method="post">
-            <input type="text" name="pid1">
-            <input type="text" name="pid2">
-            <input type="submit" value="Crear pelea">
-        </form>
+
+        <?php } elseif ($_SESSION['tipo'] == 2) {?>
+            <form align="center" action="views/proponer_vuelo.php" method="get">
+                <input type="submit" value="Crear propuesta de vuelo">
+            </form>
+            <?php include("consultas/vuelos_compania.php")?>
+        <?php } elseif ($_SESSION['tipo'] == 3) {?>
+            <?php include("views/pasajero.php")?>
+        <?php } ?>
+        
 
     <?php } ?>
 
