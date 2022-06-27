@@ -1,0 +1,49 @@
+% --- Paquetes --- %
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{ifpdf}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf}
+\usepackage{fullpage}
+\usepackage[squaren]{SIunits}
+\usepackage{amsmath,amsfonts,amssymb,amsxtra}
+\decimalpoint
+\usepackage{hyperref}
+\hypersetup{colorlinks=false,bookmarksopen=true,linkbordercolor={1 1 1}}
+\usepackage{epstopdf}
+
+% --- Encabezado PUC --- %
+\newcommand{\pucheader}
+{
+\vspace*{-1cm}
+\includegraphics[width=2.5cm]{figures/logo.jpg}
+\vspace*{-2cm}
+
+\hspace*{2.5cm}
+ \begin{tabular}{l}
+  {\sc Pontificia Universidad Cat\'olica de Chile}\\
+  {\sc Escuela de Ingenier\'ia}\\
+  {\sc Departamento de Ciencia de la Computación}\\
+ 
+  {\sc }
+ \end{tabular}
+ \hfill 
+}
+
+% --- Encabezado curso --- %
+\newcommand{\courseheader}[7]
+{
+	\vspace*{-0.2cm}
+	\begin{center}
+		{#1 --- #2} \\
+		\vspace*{2mm}
+		{\Large\bf #3}\\
+		\vspace*{2mm}
+		#4 - #5 - #6\\
+		\vspace*{0.5mm}
+		
+	\end{center}
+	\hrule\vspace*{2pt}\hrule
+	\vspace*{2pt}
+	\vspace{1ex}
+}
