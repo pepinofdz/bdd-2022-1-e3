@@ -56,6 +56,7 @@
                 <input type="submit" value="Filtrar">
             </form>
             <form align="center" action="index.php" method="get">
+                <p>Filtrar por fecha de solicitud</p>
                 <input type="submit" value="Quitar filtro">
             </form>
 
@@ -63,6 +64,9 @@
 
 
         <?php } elseif ($_SESSION['tipo'] == 2) {?>
+            <form align="center" action="views/proponer_vuelo.php" method="get">
+                <input type="submit" value="Crear propuesta de vuelo">
+            </form>
             <?php include("consultas/vuelos_compania.php")?>
         <?php } elseif ($_SESSION['tipo'] == 3) {?>
             <?php include("views/pasajero.php")?>
