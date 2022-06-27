@@ -1,0 +1,29 @@
+<?php
+    include("templates/header.html");
+?>
+    <h1 class="title is-4"></h1>
+<?php
+	require("../config/conection.php");
+	$query = "SELECT * FROM Vuelo WHERE estado = 'pendiente';";
+	$result = $db -> prepare($query);
+	$result -> execute();
+	$data = $result -> fetchAll();
+?>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+<body>
+    <h1 class="title is-1" style="text-align: center;">Grupo 67</h1>
+
+    <h1 class="title is-3">Consultas estaticas</h1>
+    <h1 class="title is-4">1. Muestre todas las propuestas de vuelo pendientes de ser aprobadas por la DGAC.</h1>
+
+
+    <h1 class="title is-4">2. Dados un código ICAO de un aeroódromo de origen y otro código de destino escritos por el usuario, liste todas las propuestas de vuelo aceptadas que viajan entre ellos.</h1>
+    <h1 class="title is-4">3. Dada una fecha escrita por el usuario (en formato dd/mm/yyyy), listar a todos los pilotos que tienen su licencia cigente para volar en esa fecha.</h1>
+    <h1 class="title is-4">4. Muestre los bloques horarios (de 1 hora) con mayor afluencia de pasajeros por cada aeródromo.</h1>
+    <h1 class="title is-4">5. Dadas dos fechas seleccionadas por el usuario, liste las aeronaves que realizaron vuelos entre estas dos fechas junto a la cantidad de vuelos que efectuaron.</h1>
+    <h1 class="title is-4">6. Muestre a los pares de piloto-copiloto que no han realizado ningún vuelo juntos.</h1>
+</body>
+
+</html>
