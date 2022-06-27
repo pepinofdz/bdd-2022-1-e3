@@ -16,44 +16,21 @@ foreach ($pasajeros_temp as $p) {
     }
 }
 
-echo $userpass;
-echo "<br>";
-echo $codigo_vuelo;
-echo "<br>";
-
 $cant_pasajeros = intval(count($pasajeros));
-echo "Cantidad de pasajeros: $cant_pasajeros";
-echo "<br>";
 
-foreach ($pasajeros as $p) {
-    echo $p;
-    echo "<br>";
-}
 $pasajeros_string = implode(",", $pasajeros);
-echo $pasajeros_string;
-echo "<br>";
+
 
 
 $query = "SELECT reservar('$userpass', '$pasajeros_string', '$codigo_vuelo');";
-echo $query;
-echo "<br>";
 $result = $db1 -> prepare($query);
 $result -> execute();
 $data = $result -> fetchAll();
 
-foreach ($data as $d) {
-    echo "Valor: $d[0]";
-    echo "<br>";
-    echo $d[1];
-}
 
 $out = substr($data[0][0], 1, strlen($data[0][0]) - 2);
 $out_list = explode(",", $out);
 
-foreach($out_list as $o) {
-    echo $o;
-    echo "<br>";
-}
 
 if ($out_list[0] == '420') {
     $msg = 'Reserva realizada exitosamente';
