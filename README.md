@@ -1,9 +1,8 @@
 # Entrega 3
-Dejen aquí cosas generales lol, al final ni se entrega pero editen el readme a gusto.
-
-Ｖａｐｏｒｗａｖｅ░Λｅｓｔｈｅｔｉｃ░Ｒｅａｄｍｅ　（益たラ）
-
 # Usuarios del sitio:
+La lista de usuarios con sus respectivas contraseñas se encuentra a continuación:
+
+
 | Usuario | Contraseña | Tipo
 | --- | --- | ---
 | DGAC      | admin     |    1
@@ -119,8 +118,12 @@ Dejen aquí cosas generales lol, al final ni se entrega pero editen el readme a 
 | X91486662 | hx66sme   |    3
 
 # Supuestos y observaciones
-- Para los tipos de usuario, Admin DGAC es representado por el número 1, la compañia con número 2 y pasajero con el número 3
-- Para la creación de la contraseña de los pasajeros, se juntaron los nombres y los pasaportes de cada pasajero en un mismo string, se le quitaron los espacios, se hizo un *shuffle* y se tomaron los primeros 8 caracteres como un largo estándar de contraseña.
+- Respecto a la creación de los usuarios:
+    - Todos los usuarios fueron creados a través del botón "Importar Usuarios", el cual está definido según los contenidos del archivo "importar_usuarios.php", ubicado en la carpeta "php/consultas".
+    - Para los tipos de usuario, Admin DGAC es representado por el número 1, las compañías con número 2 y pasajero con el número 3.
+    - Para la creación de la contraseña de los pasajeros, se juntaron los nombres y los pasaportes de cada pasajero en un mismo string, se le quitaron los espacios, se hizo un *shuffle* y se tomaron los primeros 8 caracteres como un largo estándar de contraseña.
 - En la búsqueda de vuelos por fecha de los admin, se debe ingresar tanto fecha de inicio como de término.
 - Respecto a la sección 3.2 (Navegación de Pasajeros):
     - De acuerdo a la *issue* #293, "los usuarios de tipo pasajero deben interactuar con los vuelos aprobados y no con los publicados". Al hacerse esta distinción, se asume que la consulta se debe hacer en la base del grupo impar (esto no se explicita en ninguna parte del enunciado, lo único que si se explicita es que la búsqueda de ciudades debe ser en la base del grupo par). Como consecuencia, al buscar un vuelo, se utiliza sólamente la información disponible en la base del grupo impar.
+- Respecto a la navegación: Los requerimientos del enunciado (todos fueron implementados) se pueden evaluar mediante una navegación intuitiva desde la *homepage*.
+- Respecto a la funcionalidad adicional: 
